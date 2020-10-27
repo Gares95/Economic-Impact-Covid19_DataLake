@@ -25,10 +25,10 @@ The reason for an EMR cluster with Spark is its capability to run big data frame
 ***
 The datasets used for this project are:
 - Stock_Countries.csv: This file contains information of each company, including:
-    1. Name
-    2. Sector
-    3. Ticker
-    4. Country
+    - Name
+    - Sector
+    - Ticker
+    - Country
 - Covid_Stringency_Index: This file contains the Stringency Index of each country regarding the measures taken to fight covid-19.
 - countrycodesA3.csv
 
