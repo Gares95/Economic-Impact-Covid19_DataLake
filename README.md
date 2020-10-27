@@ -8,7 +8,7 @@ To do that, this repository includes the script to produce a dataset of more tha
 This repository also includes a file produced by the **Oxford Coronavirus Goverment Response Tracker (OxCGRT project)** which contains information of each country with a _Government Response Stringency Index_ which indicates the stringency regarding each government's response to reduce the impacts of covid-19 (https://ourworldindata.org/policy-responses-covid#schools-closures).
 
 These two files correspond to the staging tables:
-![alt text](./Data/Img/Staging_tables.PNG)
+![alt text](https://raw.githubusercontent.com/Gares95/Data-Engineering-Nanodegree-Capstone-Project/master/data/Img/Staging_tables.PNG)
 
 After cleaning and processing the data into analytics tables using Spark in a **EMR cluster** (through the ETL file) we will obtain the Data Lake desired in a S3 bucket.  
 
@@ -51,7 +51,7 @@ The tables of the star schema that is going to be created using this program are
 
 
 The final database with a star schema model will have the next structure:
-![alt text](./Data/Img/Data_model.PNG)
+![alt text](https://raw.githubusercontent.com/Gares95/Data-Engineering-Nanodegree-Capstone-Project/master/data/Img/Data_model.PNG)
 
 # EMR cluster
 The AWS infrastructure used was an EMR Cluster with the following settings:  
