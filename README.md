@@ -30,7 +30,6 @@ The datasets used for this project are:
     - Ticker
     - Country
 - Covid_Stringency_Index: This file contains the Stringency Index of each country regarding the measures taken to fight covid-19.
-- countrycodesA3.csv
 
 With the previous files we will produce the staging tables
 - Staging_stock_table.csv: To produce this file I've used a filed with information about each country that I've collected (Stock_Countries.csv) and through each company's _Ticker_ I've extracted the stock market values using _yfinance_ library (https://github.com/ranaroussi/yfinance). 
