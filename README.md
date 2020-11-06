@@ -5,7 +5,7 @@ After the coronavirus outbreak (COVID-19) governments, companies and organizatio
 Unfortunately, this virus has had an impact in very varied areas. This repository collects information to assess the _economic impact_ of the Covid-19 in the stock market in more than 1850 companies in 50 different countries around the world.
 
 To do that, this repository includes the script to produce a dataset of more than 2.5 million rows with the stock market data of each company that dates back 400 days, which will allow to clearly see the values before the outbreak and the impact during the pandemic.  
-This repository also includes a file produced by the **Oxford Coronavirus Goverment Response Tracker (OxCGRT project)** which contains information of each country with a _Government Response Stringency Index_ which indicates the stringency regarding each government's response to reduce the impacts of covid-19 (https://ourworldindata.org/policy-responses-covid#schools-closures).
+This repository also includes a file produced by the **Oxford Coronavirus Goverment Response Tracker (OxCGRT project)** which contains information of each country with a _Government Response Stringency Index_ which indicates the stringency regarding each government's response to reduce the impacts of covid-19 (https://ourworldindata.org/policy-responses-covid#government-stringency-index).
 
 These two files correspond to the staging tables:
 ![alt text](https://raw.githubusercontent.com/Gares95/Data-Engineering-Nanodegree-Capstone-Project/master/data/Img/Staging_tables.PNG)
