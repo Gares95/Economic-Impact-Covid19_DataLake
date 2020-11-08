@@ -108,5 +108,5 @@ Thanks to the S3 our data lake would be accessible to the extra 100 people but i
 
 ### Credits
 Udacity provided the guidelines to start this project.
-The completion of this was made by Guillermo Garcia and the review of the program and the verification that the project followed the proper procedures was also made by my mentor from udacity.
+The entirety of the project was developed by Guillermo Garcia and the review of the code and the verification that the project followed the proper procedures was made by my mentor from udacity.
 
