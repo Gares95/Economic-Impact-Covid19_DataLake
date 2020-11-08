@@ -107,6 +107,6 @@ In this case it would be recommended to incorporated Airflow to create a Dag wit
 Thanks to the S3 our data lake would be accessible to the extra 100 people but if necessary, we could implement it to use Redshift with auto-scaling instead for a better aproach.
 
 ### Credits
-Udacity provided the template and the guidelines to start this project.
+Udacity provided the guidelines to start this project.
 The completion of this was made by Guillermo Garcia and the review of the program and the verification that the project followed the proper procedures was also made by my mentor from udacity.
 
