@@ -108,7 +108,7 @@ Hellenic Petroleum;Integrated Oil and Gas;ELPE.AT;Greece
 National Bank of Greece;Banks;ETE.AT;Greece
 Eurobank Ergasias;Banks;EUROB.AT;Greece
 EYDAP;Water;EYDAP.AT;Greece
-Folli Follie;Specialty Retailers;FFGRP.AT;Greece
+Folli Follie;Specialty Retailers;FLLIY;Greece
 GEK Terna;Heavy Construction;GEKTERNA.AT;Greece
 OTE;Fixed Line Telecommunications;HTO.AT;Greece
 Lamda Development S.A.;Real Estate Holding & Development;LAMDA.AT;Greece
@@ -213,9 +213,9 @@ AKKO Invest;Industrial Services;AKKO.BD;Hungary
 ANY Security Printing;Diversified Industrials;ANY.BD;Hungary
 Appeninn Asset Management;Real Estate;APPENINN.BD;Hungary
 AutoWallis;Automobiles & Parts;AUTOWALLIS.BD;Hungary
-CIG Pannonia Life Insurance;Insurance;CIGPANNONIA.BD;Hungary
+CIG Pannonia Life Insurance;Insurance;CIG.BD;Hungary
 Graphisoft Park;Real Estate;GSPARK.BD;Hungary
-Magyar Telekom;Telecommunications;MTELEKOM.BD;Hungary
+Magyar Telekom;Telecommunications;MTEL.BD;Hungary
 MOL Group;Oil & Gas;MOL.BD;Hungary
 Opus;Industrial Services;OPUS.BD;Hungary
 OTP Bank;Banks;OTP.BD;Hungary
@@ -917,7 +917,7 @@ Reinet Investments;Investment;REINA.AS;Luxembourg
 RTL Group;Media;RRTL.DE;Luxembourg
 SES;Telecommunications;SESG.PA;Luxembourg
 AirAsia Berhad;Airline;5099.KL;Malaysia
-Astino Berhad;Industrial;ATNO.KL;Malaysia
+Astino Berhad;Industrial;7162.KL;Malaysia
 Maxis Berhad;Telecommunications;6012.KL;Malaysia
 Top Glove Corporation Berhad;Materials;TGLVY;Malaysia
 Tenaga Nasional Berhad;Energy;TNABY;Malaysia
@@ -934,10 +934,10 @@ Sunway Real Estate Investment Trust;Real Estate;5176.KL;Malaysia
 FTSE Bursa Malaysia KLCI ETF;Financial;0820EA.KL;Malaysia
 MY E.G. SERVICES BHD;Consumer Discretionary;0138.KL;Malaysia
 FRONTKEN CORPORATION BHD;Industrial;0128.KL;Malaysia
-Gamuda Bhd;Industrial;GAMU.KL;Malaysia
+Gamuda Bhd;Industrial;5398.KL;Malaysia
 Genting Malaysia Berhad;Consumer discretionary;GMALF;Malaysia
 Hibiscus Petroleum Berhad;Energy;5199.KL;Malaysia
-WCT Holdings Berhad;Financial;WCTE.KL;Malaysia
+WCT Holdings Berhad;Financial;9679.KL;Malaysia
 Superlon Holdings Berhad;Financial;7235.KL;Malaysia
 ALFA;Conglomerate;ALFAA.MX;Mexico
 América Móvil;Telecommunications;AMXL.MX;Mexico
@@ -965,7 +965,7 @@ Norsk Hydro;aluminium;NHY.OL;Norway
 Orkla;packaged foods and meats;ORK.OL;Norway
 SalMar;packaged foods and meats;SALM.OL;Norway
 Scatec Solar;renewable electricity;SSO.OL;Norway
-Schibsted;publishing;SCH.OL;Norway
+Schibsted;publishing;SCHB.OL;Norway
 Storebrand;life and health insurance;STB.OL;Norway
 Subsea 7;oil and gas equipment and services;SUBC.OL;Norway
 Telenor;integrated telecommunication services;TEL.OL;Norway
@@ -1130,7 +1130,7 @@ Inter RAO;Energy;IRAO.ME;Russia
 Lukoil;Oil & gas;LKOH.ME;Russia
 LSR Group;Real estate development;LSRG.ME;Russia
 Magnitogorsk Iron and Steel Works;Metallurgy;MAGN.ME;Russia
-MegaFon;Telecommunication;MFON.ME;Russia
+MegaFon;Telecommunication;MFOYY;Russia
 OJSC Magnit;Retail;MGNT.ME;Russia
 Moscow Exchange;Stock exchange;MOEX.ME;Russia
 Mosenergo;Energy;MSNG.ME;Russia
