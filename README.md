@@ -92,6 +92,9 @@ With this file we will process all files from the S3 buckets and create the star
 
 Once the Etl has been runned we can deploy an Interface in the EMR machine to see the stock market values of a company overlaid with the stringency values of the country the company is located. 
 
+Here is a screenshot of the Interface:
+![alt text](https://raw.githubusercontent.com/Gares95/Economic-Impact-Covid19_DataLake/master/Data/Img/Interface.PNG)
+
 ## Quality_Check_And_Example.ipynb
 
 This file can be used to perform quality checks and it presents an example of how the data lake can be used to analyze the economic impact of covid-19. 
