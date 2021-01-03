@@ -55,11 +55,11 @@ app.layout = html.Div(children=[
 def update_myPlot(selected_company):
     spain_df_p = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==selected_company)).sort("Date").toPandas()
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["value"]),
+    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["value"], name = "Open Values"),
         secondary_y=False,
     )
     
-    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["stringency_index"]),
+    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["stringency_index"], name = "Stringency Index"),
         secondary_y=True,
     )
     # fig.update_layout(
