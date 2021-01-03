@@ -1,18 +1,8 @@
-
-import plotly.express as px
-from plotly.offline import download_plotlyjs, init_notebook_mode,  plot
-from plotly.graph_objs import *
-
 import pandas as pd
 
 import configparser
-from datetime import datetime
-import boto3, os
+import os
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import udf, col
-from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, dayofweek, date_format
-
-import matplotlib.pyplot as plt 
 
 spark = SparkSession \
         .builder \
@@ -42,16 +32,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(children=[
     html.H1(children='Stringency vs Stock market values'),
-    html.Div(children='''
-        Filter by country
-    '''),
-    dcc.Dropdown(
-            options = [
-                # {'label': i, 'value': j} for i,j in countries_df['country_code'],countries_df['country']
-                {'label': i, 'value': j} for i, j in zip(countries_df['country'], countries_df['country_code'])
-                ],
-            value=''
-        ),
+    
     html.Div(children='''
         Select company
     '''),
@@ -74,7 +55,6 @@ app.layout = html.Div(children=[
 def update_myPlot(selected_company):
     spain_df_p = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==selected_company)).sort("Date").toPandas()
     spain_df_p['stringency_index'] = (spain_df_p['stringency_index']/spain_df_p['stringency_index'].max())*spain_df_p['value'].max()
-    spain_df_p.plot(x='date', y=['value', 'stringency_index'], kind='line', rot=45)
     
     fig =px.line(spain_df_p, x='date', y=['value', 'stringency_index'])
     fig.update_layout(transition_duration=500)
