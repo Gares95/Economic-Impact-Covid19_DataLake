@@ -62,16 +62,16 @@ def update_myPlot(selected_company):
     fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["stringency_index"]),
         secondary_y=True,
     )
-    fig.update_layout(
-        title_text="Stringency vs Stock market values"
-    )
+    # fig.update_layout(
+    #     title_text="Stringency vs Stock market values"
+    # )
     
     # Set x-axis title
-    fig.update_xaxes(title_text="Dates selected")
+    fig.update_xaxes(title_text="Date")
     
     # Set y-axes titles
-    fig.update_yaxes(title_text="<b>Stock Open Values</b>", secondary_y=False)
-    fig.update_yaxes(title_text="<b>Stringency Values</b>", secondary_y=True)
+    fig.update_yaxes(title_text="<b>Open Values</b>", secondary_y=False)
+    fig.update_yaxes(title_text="<b>Stringency Index</b>", secondary_y=True)
     
     fig.update_layout(transition_duration=500)
     
