@@ -1,8 +1,8 @@
-import pandas as pd
-
-import configparser
 import os
 from pyspark.sql import SparkSession
+
+import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 
 spark = SparkSession \
         .builder \
@@ -54,9 +54,25 @@ app.layout = html.Div(children=[
                           
 def update_myPlot(selected_company):
     spain_df_p = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==selected_company)).sort("Date").toPandas()
-    spain_df_p['stringency_index'] = (spain_df_p['stringency_index']/spain_df_p['stringency_index'].max())*spain_df_p['value'].max()
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["value"]),
+        secondary_y=False,
+    )
     
-    fig =px.line(spain_df_p, x='date', y=['value', 'stringency_index'])
+    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["stringency_index"]),
+        secondary_y=True,
+    )
+    fig.update_layout(
+        title_text="Stringency vs Stock market values"
+    )
+    
+    # Set x-axis title
+    fig.update_xaxes(title_text="Dates selected")
+    
+    # Set y-axes titles
+    fig.update_yaxes(title_text="<b>Stock Open Values</b>", secondary_y=False)
+    fig.update_yaxes(title_text="<b>Stringency Values</b>", secondary_y=True)
+    
     fig.update_layout(transition_duration=500)
     
     return fig
