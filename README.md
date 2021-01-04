@@ -106,6 +106,8 @@ Please bear in mind that the restrictions imposed by each country (measured by t
 
 In addition, it is important to remember that the stock values of multinational companies such as Google (Alphabetic Inc.) are not only affected by the on-going restrictions in the country where it is headquartered but probably, by restrictions in other countries where the company operates. 
 If a multinational company is dual-listing its shares it can be useful to select the ticker for a specific exchange, e.g. Selecting SAN.MC (Madrid Stock Exchange) to assess the economic impact of Spanish restrictions on the Santander Bank stock prices.
+
+
 ---
     
 ## README.md
