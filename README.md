@@ -1,13 +1,13 @@
 # Data Lake to assess the economic impact of Covid19
-***
 After the coronavirus outbreak (COVID-19) governments, companies and organizations around the world are working to help prevent and alleviate the effects of coronavirus and also face its consequences. 
 
 Unfortunately, this virus has had an impact in very varied areas. This repository collects information to assess the _economic impact_ of the Covid-19 in the stock market in more than 1850 companies in 50 different countries around the world.
 
 To do that, this repository includes the script to produce a dataset of more than 2.5 million rows with the stock market data of each company that dates back 400 days, which will allow to clearly see the values before the outbreak and the impact during the pandemic.  
-This repository also includes a file produced by the **Oxford Coronavirus Goverment Response Tracker (OxCGRT project)** which contains information of each country with a _Government Response Stringency Index_ which indicates the stringency regarding each government's response to reduce the impacts of covid-19 (https://ourworldindata.org/policy-responses-covid#government-stringency-index).
+This repository also includes a file produced by the **Oxford Coronavirus Government Response Tracker (OxCGRT project)** which contains information of each country with a _Government Response Stringency Index_ which indicates the stringency regarding each government's response to reduce the impacts of covid-19 (https://ourworldindata.org/policy-responses-covid#government-stringency-index).
 
 These two files correspond to the staging tables:
+
 ![alt text](https://raw.githubusercontent.com/Gares95/Data-Engineering-Nanodegree-Capstone-Project/master/Data/Img/Staging_tables.PNG)
 
 After cleaning and processing the data into analytics tables using Spark in a **EMR cluster** (through the ETL file) we will obtain the Data Lake desired in a S3 bucket.  
@@ -22,7 +22,6 @@ The reason to use a Data Lake for this model is due to its simple implementation
 The reason for an EMR cluster with Spark is its capability to run big data frameworks and its integrity to process and analyze big amounts of data.
 
 # Data Files
-***
 The datasets used for this project are:
 - Stock_Countries.csv: This file contains information of each company, including:
     - Name
@@ -50,6 +49,7 @@ The tables of the star schema that is going to be created using this program are
 
 
 The final database with a star schema model will have the next structure:
+
 ![alt text](https://raw.githubusercontent.com/Gares95/Data-Engineering-Nanodegree-Capstone-Project/master/Data/Img/Data_model.PNG)
 
 # EMR cluster
@@ -67,7 +67,6 @@ For the _Cleaning_Staging_Data_ notebook to work it is necessary to install the 
 ``pip install -r requirements.txt``
 
 # Program files
-***
 ## Cp.cfg
 
 This file contains the AWS credentials to access the S3 buckets. 
@@ -94,27 +93,34 @@ This file can be used to perform quality checks and it presents an example of ho
 
 ## Interface.py
 
-Once the Etl has been runned we can deploy an Interface in the EMR machine which will run on http://127.0.0.1:8050/ of the machine, it is possible to change to change the URL configuring the rewrite rules to control clients requests (Here is an example of how to do it using Nginx: https://www.nginx.com/blog/creating-nginx-rewrite-rules/). The interface will allow to see the stock market values of a company overlaid with the stringency values of the country the company is located. 
+Once the Etl has run, we can deploy a web interface hosted on the master node of our EMR cluster and easily access to it using an Application Load Balancer (Here is the documentation to do so: https://aws.amazon.com/es/blogs/big-data/access-web-interfaces-securely-on-amazon-emr-launched-in-a-private-subnet-using-an-application-load-balancer/). The web interface (developed with Dash) will allow to see the stock market values of a company overlaid with the stringency values of the country the company is located. 
 
 Here is a screenshot of the Interface:
 
 ![alt text](https://raw.githubusercontent.com/Gares95/Economic-Impact-Covid19_DataLake/master/Data/Img/Interface.PNG)
+
+---
+**Note**
+
+Please bear in mind that the restrictions imposed by each country (measured by the Stringency Index value) may have or haven't influence the open values of a company stock. This interface calculates the relation between these two variables but *the Stringency Index value should not be considered as the only or as the main responsible for the variation of the Stock market values*. Instead, it should be considered as another factor that may represent other medical, social and economic conditions in each country, which may have affected (directly or indirectly) the stock prices of the Company displaying.
+
+In addition, it is important to remember that the stock values of multinational companies such as Google (Alphabetic Inc.) are not only affected by the on-going restrictions in the country where it is headquartered but probably, by restrictions in other countries where the company operates. 
+If a multinational company is dual-listing its shares it can be useful to select the ticker for a specific exchange, e.g. Selecting SAN.MC (Madrid Stock Exchange) to assess the economic impact of Spanish restrictions on the Santander Bank stock prices.
+---
     
 ## README.md
 
 This file provides the description of the program and process of the etl.
 
 # Possible Future Scenarios
-***
 Because the data lake is subject to possible modifications, I'm going to suggest some solutions:  
 - The data increases by 100X:
-For this scenario the right approach would be to increase the number of instances of the EMR cluster and maybe upgrade the Instance type to a _r4.xlarge_ to take advantage of the increased memory.
+For this scenario, the right approach would be to increase the number of instances of the EMR cluster and maybe upgrade the Instance type to a _r4.xlarge_ to take advantage of the increased memory.
 - Pipelines run on daily basis at 7am:
 In this case it would be recommended to incorporated Airflow to create a Dag with a schedule that would run the _Cleaning_Staging_Data_ to obtain the most recent values of the stock market values of the companies in our Stock_Countries.csv file and the ETL to update the data lake.
 - The database is needed to be accessed by 100+ people:
-Thanks to the S3 our data lake would be accessible to the extra 100 people but if necessary, we could implement it to use Redshift with auto-scaling instead for a better aproach.
+Thanks to the S3 our data lake would be accessible to the extra 100 people but if necessary, we could implement it to use Redshift with auto-scaling instead for a better approach.
 
 ### Credits
 Udacity provided the guidelines to start this project.
 The entirety of the project was developed by Guillermo Garcia and the review of the code and the verification that the project followed the proper procedures was made by my mentor from udacity.
-
