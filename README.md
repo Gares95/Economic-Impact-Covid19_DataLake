@@ -106,7 +106,7 @@ Here is a screenshot of the Interface:
 
 Please bear in mind that the restrictions imposed by each country (measured by the Stringency Index value) may have or haven't influence the open values of a company stock. This interface calculates the relation between these two variables but **the Stringency Index value should not be considered as the only or as the main responsible for the variation of the Stock market values**. Instead, it should be considered as another factor that may represent other medical, social and economic conditions in each country, which may have affected (directly or indirectly) the stock prices of the Company displaying.
 
-In addition, it is important to remember that the stock values of multinational companies such as Google (Alphabetic Inc.) are not only affected by the on-going restrictions in the country where it is headquartered but probably, by restrictions in other countries where the company operates. 
+In addition, it is important to remember that the stock values of multinational companies such as Google (Alphabetic Inc.) are not only affected by the on-going restrictions in the country where it is headquartered but also, by restrictions in other countries where the company operates. 
 If a multinational company is dual-listing its shares it can be useful to select the ticker for a specific exchange, e.g. Selecting SAN.MC (Madrid Stock Exchange) to assess the economic impact of Spanish restrictions on the Santander Bank stock prices.
 ***
     

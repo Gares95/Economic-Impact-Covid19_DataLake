@@ -19,12 +19,13 @@ companies_df = spark.read.parquet(os.path.join(output_data, "stocks/*.parquet"))
 
 Ec_status_df = spark.read.parquet(os.path.join(output_data, "Ec_status/*.parquet"))
 
+Ec_status_inf = spark.read.parquet(os.path.join(output_data, "Ec_status/*.parquet")).select(["country_code", "stock_id"]).sort("country_code").dropDuplicates().toPandas()
+
 
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-import plotly.express as px
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -45,7 +46,8 @@ app.layout = html.Div(children=[
             value='GOOGL'
         ),
 
-    dcc.Graph(id='stock-stringency')
+    dcc.Graph(id='stock-stringency'),
+    html.Div(id='info-company', style={'whiteSpace': 'pre-line'})
 ])
 
 @app.callback(
@@ -76,6 +78,13 @@ def update_myPlot(selected_company):
     fig.update_layout(transition_duration=500)
     
     return fig
+
+@app.callback(
+    Output('info-company', 'children'),
+    [Input('company-id', 'value'),Input('company-id', 'options')])
+def update_info(value, options):
+    spain_df_p = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==value)).sort("Date").toPandas()
+    return "Country: {}\nDates from {} to {}\nSector: {}".format(countries_df[countries_df['country_code']==Ec_status_inf[Ec_status_inf['stock_id']==value].country_code.iloc[0]].country.iloc[0], spain_df_p.date.min(), spain_df_p.date.max(), companies_df[companies_df['stock_id']==value].sector.iloc[0])
 
 if __name__ == '__main__':
     app.run_server(debug=True)
