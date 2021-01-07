@@ -4,6 +4,11 @@ from pyspark.sql import SparkSession
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+
 spark = SparkSession \
         .builder \
         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
@@ -22,11 +27,6 @@ Ec_status_df = spark.read.parquet(os.path.join(output_data, "Ec_status/*.parquet
 Ec_status_inf = spark.read.parquet(os.path.join(output_data, "Ec_status/*.parquet")).select(["country_code", "stock_id"]).sort("country_code").dropDuplicates().toPandas()
 
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-from dash.dependencies import Input, Output
-
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -43,11 +43,13 @@ app.layout = html.Div(children=[
             options = [
                 {'label': i, 'value': j} for i, j in zip(companies_df['company_name'], companies_df['stock_id'])
                 ],
-            value='GOOGL'
+            value='SAN.MC'
         ),
 
-    dcc.Graph(id='stock-stringency'),
-    html.Div(id='info-company', style={'whiteSpace': 'pre-line'})
+    html.Div(id='info-company', style={'whiteSpace': 'pre-line', 'display': 'inline-block', 'margin-top': '10px', 'margin-right': '250px'}),
+    html.Div(id='info-dates', style={'whiteSpace': 'pre-line', 'display': 'inline-block'}),
+    
+    dcc.Graph(id='stock-stringency')
 ])
 
 @app.callback(
@@ -55,18 +57,15 @@ app.layout = html.Div(children=[
     Input('company-id', 'value'))
                           
 def update_myPlot(selected_company):
-    spain_df_p = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==selected_company)).sort("Date").toPandas()
+    company_selected = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==selected_company)).sort("Date").toPandas()
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["value"], name = "Open Values"),
+    fig.add_trace(go.Line(x=company_selected["date"], y=company_selected["value"], name = "Open Values"),
         secondary_y=False,
     )
     
-    fig.add_trace(go.Line(x=spain_df_p["date"], y=spain_df_p["stringency_index"], name = "Stringency Index"),
+    fig.add_trace(go.Line(x=company_selected["date"], y=company_selected["stringency_index"], name = "Stringency Index"),
         secondary_y=True,
     )
-    # fig.update_layout(
-    #     title_text="Stringency vs Stock market values"
-    # )
     
     # Set x-axis title
     fig.update_xaxes(title_text="Date")
@@ -75,7 +74,7 @@ def update_myPlot(selected_company):
     fig.update_yaxes(title_text="<b>Open Values</b>", secondary_y=False)
     fig.update_yaxes(title_text="<b>Stringency Index</b>", secondary_y=True)
     
-    fig.update_layout(transition_duration=500)
+    fig.update_layout(margin = {'t':15},transition_duration=500)
     
     return fig
 
@@ -83,8 +82,17 @@ def update_myPlot(selected_company):
     Output('info-company', 'children'),
     [Input('company-id', 'value'),Input('company-id', 'options')])
 def update_info(value, options):
-    spain_df_p = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==value)).sort("Date").toPandas()
-    return "Country: {}\nDates from {} to {}\nSector: {}".format(countries_df[countries_df['country_code']==Ec_status_inf[Ec_status_inf['stock_id']==value].country_code.iloc[0]].country.iloc[0], spain_df_p.date.min(), spain_df_p.date.max(), companies_df[companies_df['stock_id']==value].sector.iloc[0])
+    return "Country: {}\nSector: {}".\
+        format(countries_df[countries_df['country_code']==Ec_status_inf[Ec_status_inf['stock_id']==value].\
+               country_code.iloc[0]].country.iloc[0], \
+               companies_df[companies_df['stock_id']==value].sector.iloc[0])
+
+@app.callback(
+    Output('info-dates', 'children'),
+    Input('company-id', 'value'))
+def update_dates_info(value):
+    company_selected = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==value)).sort("Date").toPandas()
+    return "Dates from {} to {}\n".format(company_selected.date.min(), company_selected.date.max())
 
 if __name__ == '__main__':
     app.run_server(debug=True)
