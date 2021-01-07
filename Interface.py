@@ -49,15 +49,17 @@ app.layout = html.Div(children=[
     html.Div(id='info-company', style={'whiteSpace': 'pre-line', 'display': 'inline-block', 'margin-top': '10px', 'margin-right': '250px'}),
     html.Div(id='info-dates', style={'whiteSpace': 'pre-line', 'display': 'inline-block'}),
     
-    dcc.Graph(id='stock-stringency')
+    dcc.Graph(id='stock-stringency'),
+    html.Div(id='info-correlation', style={'whiteSpace': 'pre-line', 'display': 'inline-block'}),
+    
 ])
 
 @app.callback(
     Output('stock-stringency', 'figure'),
     Input('company-id', 'value'))
                           
-def update_myPlot(selected_company):
-    company_selected = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==selected_company)).sort("Date").toPandas()
+def update_myPlot(ticker_selected):
+    company_selected = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==ticker_selected)).sort("Date").toPandas()
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Line(x=company_selected["date"], y=company_selected["value"], name = "Open Values"),
         secondary_y=False,
@@ -93,6 +95,14 @@ def update_info(value, options):
 def update_dates_info(value):
     company_selected = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==value)).sort("Date").toPandas()
     return "Dates from {} to {}\n".format(company_selected.date.min(), company_selected.date.max())
+
+@app.callback(
+    Output('info-correlation', 'children'),
+    Input('company-id', 'value'))
+def update_correlation(ticker_selected):
+    company_selected = Ec_status_df.filter((Ec_status_df.value_type=='Open') & (Ec_status_df.stock_id==ticker_selected)).sort("Date").toPandas()
+    return "Correlation (pearson): {}\n".format(company_selected.corr(method = "pearson").loc['stringency_index', 'value'])
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
